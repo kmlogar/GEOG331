@@ -24,3 +24,17 @@ b <- c(2446, 40, 10000)
 
 #divide all numbers by 2
 b/2
+
+# assign number 5 to variable num
+num <- 5
+
+# create a vector with 4 integers and the previously assigned variable
+# and assign vector to variable vec
+vec <- c(1,2,3,4,num)
+
+# cube each of the numbers in vec
+cube <- vec^3
+
+# display vectors
+vec
+cube

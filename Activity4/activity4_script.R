@@ -41,9 +41,17 @@ for(i in 1:3) {
 
 #use dplyr to join data of maximum height
 #to a new iris data frame
+
 height <- data.frame(Species = c("virginica","setosa","versicolor"),
                      Height.cm = c(60,100,11.8))
 
+#iris left
+#height right
+#compute left join
+iris2 <- left_join(iris, height, by = "Species")
+
+#calculate normalized petal width based on species maximum height
+iris2$Petal.Width/iris2$Height.cm
 
 
 #####################################
@@ -52,14 +60,20 @@ height <- data.frame(Species = c("virginica","setosa","versicolor"),
 #look at base R scatter plot
 plot(iris$Sepal.Length,iris$Sepal.Width)
 
-#3a. now make the same plot in ggplot
-
+#3a. nowcd make the same plot in ggplot
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
+       geom_point()
 
 #3b. make a scatter plot with ggplot and get rid of  busy grid lines
-
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_point()+
+  theme_classic()
 
 #3c.make a scatter plot with ggplot and get rid of grid lines
 #and show species by color increasing the point size
+ggplot(data = iris, aes(Sepal.Length, Sepal.Width, color=Species)) +
+  geom_point(size = 4)+
+  theme_classic()
 
 #####################################
 ##### Question: how did         #####

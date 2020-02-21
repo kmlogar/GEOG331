@@ -29,7 +29,8 @@ assert(length(a) == length(b), "error: unequal length")
 #skip the first 3 rows since there is additional column info
 #specify the NA is designated differently
 #y:\\Students\\klogar\\a03\\bewkes_weather.csv
-datW <- read.csv("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity3/bewkes_weather.csv",
+#/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity3/bewkes_weather.csv
+datW <- read.csv("y:\\Students\\klogar\\a03\\bewkes_weather.csv",
                  na.strings = c("#N/A"),
                  skip = 3,
                  header = FALSE)
@@ -40,7 +41,7 @@ print(datW[1,])
 #get sensor info from file
 #this data table will contain all relevant units
 #y:\\Students\\hkropp\\a03\\bewkes_weather.csv
-sensorInfo <- read.csv("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity3/bewkes_weather.csv",
+sensorInfo <- read.csv("y:\\Students\\klogar\\a03\\bewkes_weather.csv",
                        na.strings=c("#N/A"), 
                        nrows = 2)
 

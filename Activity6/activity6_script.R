@@ -9,16 +9,16 @@ library(rgeos)
 library(plyr)
 
 #read in files
-f1966=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1966.shp")
-f1998=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1998.shp")
-f2005=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2005.shp")
-f2015=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2015.shp")
+f1966=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1966.shp","/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_1966.shp")
+f1998=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1998.shp", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_1998.shp")
+f2005=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2005.shp", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_2005.shp")
+f2015=c("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2015.shp", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_2015.shp")
 
 
-g1966 <- readOGR("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_1966.shp")
-g1998 <- readOGR("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_1998.shp")
-g2005 <- readOGR("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_2005.shp")
-g2015 <- readOGR("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/GNPglaciers/GNPglaciers_2015.shp")
+g1966 <- readOGR("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1966.shp")
+g1998 <- readOGR("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_1998.shp")
+g2005 <- readOGR("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2005.shp")
+g2015 <- readOGR("Y:\\Students\\klogar\\a06\\GNPglaciers\\GNPglaciers_2015.shp")
 
 #investigate data about plots
 str(g2015)
@@ -46,12 +46,13 @@ g2015@data$GLACNAME <- ifelse(g2015@data$GLACNAME == "North Swiftcurrent Glacier
                                         as.character(g2015@data$GLACNAME)))
 
 #read in rgb imagery from landsat
-red.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_red.tif")
-green.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_green.tif")
-blue.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_blue.tif")
-redL <- raster("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_red.tif")
-greenL <- raster("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_green.tif")
-blueL <- raster("/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_blue.tif")
+red.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_red.tif", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_red.tif")
+green.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_green.tif", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_green.tif")
+blue.files <- c("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_blue.tif", "/Users/kaylal26/Documents/ColgateAcademics/Spring2020/EnvironmentalDataScience/GitHub/GEOG331/Activity6/glacier_09_05_14/l08_blue.tif")
+
+redL <- raster("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_red.tif")
+greenL <- raster("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_green.tif")
+blueL <- raster("Y:\\Students\\hkropp\\a06\\glacier_09_05_14\\l08_blue.tif")
 
 
 #check coordinate system
@@ -201,13 +202,19 @@ max.loss.2005 <- subset(g2005p, g2005p$GLACNAME == max.loss.name)
 
 # note: glacial extent in 1966:
 #[-80123:-78850, 106841:107222]
-
-plot(NDVIraster[[13]], axes = FALSE, box=FALSE, xlim = c(-80250,-78700), ylim=c(106700,107300))
+par(mai = c(1,1,1,1))
+plot(NDVIraster[[13]], axes = FALSE, box=FALSE, xlim = c(-80250,-78700), ylim=c(106300,107600))
 plot(max.loss.2015, col=NA, border="black",add = TRUE)
 plot(max.loss.2005, col=NA, border="slateblue3",add = TRUE)
-plot(max.loss.1998, col=NA, border="steelblue4",add = TRUE)
-plot(max.loss.1966, col=NA, border="steelblue1",add = TRUE)
+plot(max.loss.1998, col=NA, border="steelblue2",add = TRUE)
+plot(max.loss.1966, col=NA, border="coral2",add = TRUE)
 title("Boulder Glacier (84.72% Loss)")
+legend(x = -80200,
+       y= 107000,
+       box.lty = 0,
+       lty = 1,
+       legend = c("1966", "1998", "2005", "2015"), 
+       col = c("coral2", "steelblue2", "slateblue3", "black"))
 
 
 #########################################
@@ -318,3 +325,30 @@ spplot(g2015p,"meanChange")
 #somewhat inconclusive - analyze map before question 7 ; maybe tie in some info from line 
 # graph too --> generally, no trend; BUT some areas have significant inc/dec...
 # tie in some sort of discussion related to glaciers
+
+#########################################
+
+
+#########################################
+##            Question 11              ##
+#########################################
+
+# average maximum NDVI across all years
+NDVImean <- calc(NDVIstack, mean)
+plot(NDVImean, axes = FALSE, box = FALSE)
+
+area.sum <- summary(g2015p@data$a2015m.sq)
+#add color-coded glacier polygons
+g2015p@data$NDVIcol <- ifelse(g2015p@data$a2015m.sq<80653,"black",
+                              ifelse(g2015p@data$a2015m.sq<218317, "red",
+                                     ifelse(g2015p@data$a2015m.sq<503914, "olivedrab",
+                                            "deepskyblue4")))
+
+
+plot(g2015p, add=TRUE, col=paste(g2015p@data$NDVIcol),border=FALSE)
+legend(x="bottomleft",
+       lty = 1,
+       lw = 4,
+       title = "Glacier Area (in square meters)",
+       legend = c("<80,653", "80,653-218,316", "218,317-503913", ">503,914"),
+       col = c("black", "red", "olivedrab", "deepskyblue4"))
